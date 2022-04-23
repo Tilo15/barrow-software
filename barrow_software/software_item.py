@@ -1,0 +1,61 @@
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import GLib, Gio, Gtk
+
+import sys
+
+class SoftwareFeatures:
+
+    def __init__(self):
+        self.is_libre = False
+        self.is_nonfree = False
+        self.is_trusted = False
+        self.has_trackers = False
+        self.uses_nonfree_services = False
+        self.has_explicit_content = False
+        self.is_featured = False
+        self.is_peer_to_peer = False
+
+    def has_antifeature(self):
+        return self.is_nonfree or (not self.is_libre) or (not self.is_trusted) or self.has_trackers or self.uses_nonfree_services or self.has_explicit_content
+
+    def set_free_from_licence_string(self, string):
+        free_keywords = ["GPL", "MPL", "BSD", "MIT", "LGPL", "ASL", "AGPL", "Unlicense", "CC-BY"]
+        if(string == "" or string == None):
+            self.is_libre = False
+            self.is_nonfree = False
+            return
+        
+        for kw in free_keywords:
+            if kw in string:
+                self.is_libre = True
+                self.is_nonfree = False
+                return
+
+        self.is_libre = False
+        self.is_nonfree = True
+
+@Gtk.Template.from_file("software_item.ui")
+class SoftwareItem(Gtk.Box):
+    __gtype_name__ = "SoftwareItem"
+
+    app_name: Gtk.Label = Gtk.Template.Child()
+    app_short_desc: Gtk.Label = Gtk.Template.Child()
+    app_icon: Gtk.Image = Gtk.Template.Child()
+    antifeature_badge: Gtk.Revealer = Gtk.Template.Child()
+
+    def __init__(self, name, short_description, long_description, package_name, size, licence, version, url, features: SoftwareFeatures, **kwargs):
+        super(Gtk.Box, self).__init__(**kwargs)
+        self.name = name
+        self.short_desc = short_description
+        self.long_description = long_description
+        self.package_name = package_name
+        self.features = features
+        self.size = size
+        self.licence = licence
+        self.version = version
+        self.url = url
+
+        self.app_name.set_label(name)
+        self.app_short_desc.set_label(short_description)
+        self.antifeature_badge.set_reveal_child(self.features.has_antifeature())
