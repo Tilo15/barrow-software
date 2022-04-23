@@ -39,7 +39,7 @@ class DnfManager:
         features = SoftwareFeatures()
         features.is_trusted = True
         features.set_free_from_licence_string(pkg.license)
-        desc = pkg.description
+        desc = pkg.description or "No description provided."
         return SoftwareItem("{} {}".format(pkg.name, pkg.version), pkg.summary, html.escape(desc), pkg.name, pkg.downloadsize, pkg.license, pkg.version, pkg.url, features)
 
     def __get_action_strings(self):
@@ -78,7 +78,7 @@ class DnfManager:
                 frac = (float(ts_done-1) + (float(ti_done) / float(ti_total))) / float(ts_total)
                 if action == dnf.callback.PKG_VERIFY:
                     frac = 1
-                    
+
                 callback(offset + frac/segments, "{} package '{}'…".format(action_strings[action], package))
         return InstallProgressHandler()
 
@@ -158,7 +158,12 @@ class DnfManager:
 
         threading.Thread(target=self.remove_package, args=(package, _pcb, _ccb, _fcb)).start()
 
-        
+    def get_package(self, package_name):
+        q = self.base.sack.query()
+        q = q.available().latest()
+        r = q.filter(name=[package_name,])
+        for a in r:
+            return a
 
     def query_installed(self, package_name):
         q = self.base.sack.query()

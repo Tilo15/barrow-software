@@ -107,7 +107,6 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-top">18</property>
                 <property name="vexpand">False</property>
                 <property name="orientation">vertical</property>
                 <child>
@@ -121,7 +120,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin-bottom">18</property>
+                        <property name="margin-top">18</property>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>
@@ -197,69 +196,126 @@
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="margin-start">90</property>
+                    <property name="margin-start">18</property>
                     <property name="margin-end">54</property>
-                    <property name="margin-bottom">18</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">8</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkRevealer" id="radio_revealer">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="label" translatable="yes">Search for Software</property>
+                        <property name="reveal-child">True</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="margin-top">18</property>
+                            <property name="margin-bottom">18</property>
+                            <child>
+                              <object class="GtkRevealer" id="search_icon_revealer">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="transition-type">crossfade</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">start</property>
+                                    <property name="margin-right">8</property>
+                                    <property name="margin-end">8</property>
+                                    <property name="pixel-size">64</property>
+                                    <property name="icon-name">system-search</property>
+                                    <property name="icon_size">6</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">8</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Search for Software</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkEntry" id="search_box">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="secondary-icon-name">system-search-symbolic</property>
+                                    <signal name="activate" handler="do_search" swapped="no"/>
+                                    <signal name="changed" handler="on_search_box_changed" swapped="no"/>
+                                    <signal name="icon-release" handler="do_search" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="app_radio">
+                                    <property name="label" translatable="yes">Search for apps</property>
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">False</property>
+                                    <property name="active">True</property>
+                                    <property name="draw-indicator">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="package_radio">
+                                    <property name="label" translatable="yes">Search for packages</property>
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">False</property>
+                                    <property name="active">True</property>
+                                    <property name="draw-indicator">True</property>
+                                    <property name="group">app_radio</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="search_box">
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="secondary-icon-name">system-search-symbolic</property>
-                        <signal name="activate" handler="do_search" swapped="no"/>
-                        <signal name="changed" handler="on_search_box_changed" swapped="no"/>
-                        <signal name="icon-release" handler="do_search" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="app_radio">
-                        <property name="label" translatable="yes">Search for apps</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">False</property>
-                        <property name="active">True</property>
-                        <property name="draw-indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRadioButton" id="package_radio">
-                        <property name="label" translatable="yes">Search for packages</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">False</property>
-                        <property name="active">True</property>
-                        <property name="draw-indicator">True</property>
-                        <property name="group">app_radio</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -282,14 +338,29 @@
                         <property name="vexpand">True</property>
                         <property name="orientation">vertical</property>
                         <child>
+                          <object class="GtkSeparator">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkScrolledWindow">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="vexpand">True</property>
+                            <property name="hscrollbar-policy">never</property>
+                            <property name="propagate-natural-width">True</property>
+                            <signal name="scroll-event" handler="on_results_scroll" swapped="no"/>
                             <child>
                               <object class="GtkViewport">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
+                                <property name="shadow-type">none</property>
                                 <child>
                                   <object class="GtkListBox" id="results_list">
                                     <property name="visible">True</property>
@@ -327,7 +398,6 @@
               <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="shadow-type">in</property>
                 <child>
                   <object class="GtkViewport">
                     <property name="visible">True</property>
@@ -424,6 +494,7 @@
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">True</property>
+                                            <property name="margin-start">8</property>
                                             <signal name="clicked" handler="do_install" swapped="no"/>
                                             <style>
                                               <class name="suggested-action"/>
@@ -449,6 +520,7 @@
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">True</property>
+                                            <property name="margin-start">8</property>
                                             <signal name="clicked" handler="do_remove" swapped="no"/>
                                             <child>
                                               <object class="GtkImage">
@@ -1402,6 +1474,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">72</property>
+                            <property name="margin-bottom">8</property>
                             <property name="label" translatable="yes">Application long form description</property>
                             <property name="use-markup">True</property>
                             <property name="wrap">True</property>
@@ -1411,6 +1484,151 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">13</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkTable">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="valign">start</property>
+                            <property name="margin-start">72</property>
+                            <property name="n-rows">4</property>
+                            <property name="n-columns">2</property>
+                            <property name="column-spacing">8</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Licence:</property>
+                                <property name="xalign">1</property>
+                                <attributes>
+                                  <attribute name="weight" value="light"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="x-options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Version:</property>
+                                <property name="xalign">1</property>
+                                <attributes>
+                                  <attribute name="weight" value="light"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="top-attach">1</property>
+                                <property name="bottom-attach">2</property>
+                                <property name="x-options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Package Size:</property>
+                                <property name="xalign">1</property>
+                                <attributes>
+                                  <attribute name="weight" value="light"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="top-attach">2</property>
+                                <property name="bottom-attach">3</property>
+                                <property name="x-options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="app_licence">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="label" translatable="yes">Licence name</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="app_version">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="label" translatable="yes">Version number</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
+                                <property name="top-attach">1</property>
+                                <property name="bottom-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="app_size">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="label" translatable="yes">Package size</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
+                                <property name="top-attach">2</property>
+                                <property name="bottom-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Website:</property>
+                                <property name="xalign">1</property>
+                                <attributes>
+                                  <attribute name="weight" value="light"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="top-attach">3</property>
+                                <property name="bottom-attach">4</property>
+                                <property name="x-options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="app_website">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="hexpand">True</property>
+                                <property name="label" translatable="yes">Package size</property>
+                                <property name="use-markup">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="xalign">0</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
+                                <property name="top-attach">3</property>
+                                <property name="bottom-attach">4</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">15</property>
                           </packing>
                         </child>
                       </object>

@@ -20,20 +20,22 @@ class SoftwareFeatures:
         return self.is_nonfree or (not self.is_libre) or (not self.is_trusted) or self.has_trackers or self.uses_nonfree_services or self.has_explicit_content
 
     def set_free_from_licence_string(self, string):
-        free_keywords = ["GPL", "MPL", "BSD", "MIT", "LGPL", "ASL", "AGPL", "Unlicense", "CC-BY"]
+        free_keywords = ["GPL", "MPL", "BSD", "MIT", "LGPL", "ASL", "AGPL", "Unlicense", "CC-BY", "zlib", "PublicDomain", "Public Domain", "public domain"]
+        self.is_libre = False
+        self.is_nonfree = False
         if(string == "" or string == None):
-            self.is_libre = False
-            self.is_nonfree = False
             return
         
         for kw in free_keywords:
             if kw in string:
+                print(kw, string)
                 self.is_libre = True
                 self.is_nonfree = False
                 return
 
-        self.is_libre = False
-        self.is_nonfree = True
+        if(string.lower() == "proprietary"):
+            self.is_libre = False
+            self.is_nonfree = True
 
 @Gtk.Template.from_file("software_item.ui")
 class SoftwareItem(Gtk.Box):
@@ -59,3 +61,6 @@ class SoftwareItem(Gtk.Box):
         self.app_name.set_label(name)
         self.app_short_desc.set_label(short_description)
         self.antifeature_badge.set_reveal_child(self.features.has_antifeature())
+
+    def set_icon_from_path(self, path):
+        self.app_icon.set_from_file(path)

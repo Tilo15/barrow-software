@@ -1,10 +1,12 @@
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gio, Gtk
+from gi.repository import GLib, Gio, Gtk, Gdk
 
 import sys
 from barrow_software.dnf_manager import DnfManager
+from barrow_software.appstream_manager import AppStreamManager
 from barrow_software.software_item import SoftwareItem
+from barrow_software.human_bytes import HumanBytes
 
 
 @Gtk.Template.from_file("main_window.ui")
@@ -12,11 +14,16 @@ class AppWindow(Gtk.ApplicationWindow):
     __gtype_name__ = "MainWindow"
 
     header_revealer: Gtk.Revealer = Gtk.Template.Child()
+    search_icon_revealer: Gtk.Revealer = Gtk.Template.Child()
     results_revealer: Gtk.Revealer = Gtk.Template.Child()
     search_box: Gtk.Entry = Gtk.Template.Child()
     stack: Gtk.Stack = Gtk.Template.Child()
     results_list: Gtk.ListBox = Gtk.Template.Child()
     back_button: Gtk.ListBox = Gtk.Template.Child()
+
+    app_radio: Gtk.RadioButton = Gtk.Template.Child()
+    package_radio: Gtk.RadioButton = Gtk.Template.Child()
+    radio_revealer: Gtk.Revealer = Gtk.Template.Child()
 
     progress_reveal: Gtk.Revealer = Gtk.Template.Child()
     progress_label: Gtk.Label = Gtk.Template.Child()
@@ -28,23 +35,32 @@ class AppWindow(Gtk.ApplicationWindow):
         self.back_button.set_sensitive(False)
         self.stack.set_visible_child_name("loader")
         self.manager: DnfManager = None
+        self.appstream: AppStreamManager = None
         self.current_item: SoftwareItem = None
-        DnfManager.create_threaded(self.manager_ready)
+        DnfManager.create_threaded(self.dnf_manager_ready)
     
-    def manager_ready(self, manager):
+    def dnf_manager_ready(self, manager):
         self.manager = manager
+        AppStreamManager.create_threaded(self.manager, self.appstream_manager_ready)
+
+    def appstream_manager_ready(self, appstream):
+        self.appstream = appstream
         self.stack.set_visible_child_name("search")
-        
 
     @Gtk.Template.Callback()
     def do_search(self, *args):
         self.clear_search_results()
-        self.manager.search_threaded(self.search_box.get_text(), self.add_result_set)
+        if(self.app_radio.get_active()):
+            self.appstream.search_threaded(self.search_box.get_text(), self.add_result_set)
+
+        if(self.package_radio.get_active()):
+            self.manager.search_threaded(self.search_box.get_text(), self.add_result_set)
 
     def add_result_set(self, results):
         for result in results:
             self.results_list.add(result)
         self.header_revealer.set_reveal_child(False)
+        self.search_icon_revealer.set_reveal_child(True)
         self.results_revealer.set_reveal_child(True)
 
     @Gtk.Template.Callback()
@@ -52,6 +68,7 @@ class AppWindow(Gtk.ApplicationWindow):
         self.clear_search_results()
         if(self.search_box.get_text() == ""):
             self.header_revealer.set_reveal_child(True)
+            self.search_icon_revealer.set_reveal_child(False)
             self.results_revealer.set_reveal_child(False)
 
     def clear_search_results(self):
@@ -63,9 +80,21 @@ class AppWindow(Gtk.ApplicationWindow):
         item = selection.get_child()
         self.show_details(item)
 
+    @Gtk.Template.Callback()
+    def on_results_scroll(self, widget, event: Gdk.EventScroll):
+        direction = event.get_scroll_deltas()
+        if(direction.delta_y < 0):
+            self.radio_revealer.set_reveal_child(True)
+        if(direction.delta_y > 0):
+            self.radio_revealer.set_reveal_child(False)
+
     app_name: Gtk.Label = Gtk.Template.Child()
     app_short_desc: Gtk.Label = Gtk.Template.Child()
     app_desc: Gtk.Label = Gtk.Template.Child()
+    app_licence: Gtk.Label = Gtk.Template.Child()
+    app_version: Gtk.Label = Gtk.Template.Child()
+    app_website: Gtk.Label = Gtk.Template.Child()
+    app_size: Gtk.Label = Gtk.Template.Child()
     app_icon: Gtk.Image = Gtk.Template.Child()
     install_revealer: Gtk.Revealer = Gtk.Template.Child()
     remove_revealer: Gtk.Revealer = Gtk.Template.Child()
@@ -81,12 +110,19 @@ class AppWindow(Gtk.ApplicationWindow):
     unknown_licence_badge: Gtk.Revealer = Gtk.Template.Child()
     featured_badge: Gtk.Revealer = Gtk.Template.Child()
 
+
+
     def show_details(self, item: SoftwareItem):
         self.back_button.set_sensitive(True)
         self.current_item = item
         self.app_name.set_label(item.name)
         self.app_short_desc.set_label(item.short_desc)
         self.app_desc.set_label(item.long_description)
+        self.app_licence.set_label(item.licence)
+        self.app_website.set_label("<a href=\"{}\">{}</a>".format(item.url, item.url))
+        self.app_version.set_label(item.version)
+        self.app_size.set_label(HumanBytes.format(item.size))
+        self.app_icon.set_from_pixbuf(item.app_icon.get_pixbuf())
         installed = self.manager.query_installed(item.package_name)
         self.remove_revealer.set_reveal_child(installed)
         self.install_revealer.set_reveal_child(not installed)
