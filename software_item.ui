@@ -45,9 +45,10 @@
                 <property name="margin-top">8</property>
                 <property name="label" translatable="yes">Application name</property>
                 <property name="wrap">True</property>
+                <property name="wrap-mode">word-char</property>
                 <property name="xalign">0</property>
                 <attributes>
-                  <attribute name="weight" value="thin"/>
+                  <attribute name="weight" value="light"/>
                   <attribute name="scale" value="1.5"/>
                 </attributes>
               </object>
@@ -65,6 +66,7 @@
                 <property name="margin-bottom">8</property>
                 <property name="label" translatable="yes">Application short description</property>
                 <property name="wrap">True</property>
+                <property name="wrap-mode">word-char</property>
                 <property name="xalign">0</property>
               </object>
               <packing>

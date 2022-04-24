@@ -40,6 +40,8 @@ class AppStreamManager:
     def component_to_item(self, component):
         features = SoftwareFeatures()
         features.is_trusted = True
+        print(component.get_categories())
+
         if(component.get_pkgname() == None):
             return None
 

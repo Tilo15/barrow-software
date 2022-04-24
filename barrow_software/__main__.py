@@ -180,6 +180,7 @@ class AppWindow(Gtk.ApplicationWindow):
 
         if self.stack.get_visible_child_name() == "category":
             self.stack.set_visible_child_name("search")
+            self.back_button.set_sensitive(False)
             return
 
 

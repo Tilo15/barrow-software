@@ -58,7 +58,7 @@
                             <property name="wrap">True</property>
                             <property name="xalign">0</property>
                             <attributes>
-                              <attribute name="weight" value="thin"/>
+                              <attribute name="weight" value="light"/>
                               <attribute name="scale" value="1.5"/>
                             </attributes>
                           </object>
@@ -74,7 +74,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="label" translatable="yes">Please wait</property>
-                            <property name="wrap">True</property>
+                            <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
                           </object>
                           <packing>
@@ -151,7 +151,7 @@
                                 <property name="wrap">True</property>
                                 <property name="xalign">0</property>
                                 <attributes>
-                                  <attribute name="weight" value="thin"/>
+                                  <attribute name="weight" value="light"/>
                                   <attribute name="scale" value="1.5"/>
                                 </attributes>
                               </object>
@@ -567,7 +567,7 @@
                                     <property name="wrap">True</property>
                                     <property name="xalign">0</property>
                                     <attributes>
-                                      <attribute name="weight" value="thin"/>
+                                      <attribute name="weight" value="light"/>
                                       <attribute name="scale" value="1.5"/>
                                     </attributes>
                                   </object>
@@ -587,6 +587,7 @@
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="halign">start</property>
+                                        <property name="valign">start</property>
                                         <property name="label" translatable="yes">Application short description</property>
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
@@ -738,7 +739,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -826,7 +827,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -914,7 +915,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1002,7 +1003,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1090,7 +1091,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1178,7 +1179,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1194,7 +1195,7 @@
                                         <property name="can-focus">False</property>
                                         <property name="halign">start</property>
                                         <property name="margin-bottom">8</property>
-                                        <property name="label" translatable="yes">Contains content that may be unsuitable for all situations and ages.</property>
+                                        <property name="label" translatable="yes">Contains content that may be unsuitable for all situations and ages such as violence, references to drugs, or sexually suggestive content.</property>
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                       </object>
@@ -1264,7 +1265,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1353,7 +1354,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1442,7 +1443,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1530,7 +1531,7 @@
                                         <property name="wrap">True</property>
                                         <property name="xalign">0</property>
                                         <attributes>
-                                          <attribute name="weight" value="thin"/>
+                                          <attribute name="weight" value="light"/>
                                           <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
@@ -1806,6 +1807,7 @@
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">Category Name</property>
                                 <property name="wrap">True</property>
+                                <property name="wrap-mode">word-char</property>
                                 <property name="xalign">0</property>
                                 <attributes>
                                   <attribute name="weight" value="thin"/>
@@ -1825,6 +1827,7 @@
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">Result counter</property>
                                 <property name="wrap">True</property>
+                                <property name="wrap-mode">word-char</property>
                                 <property name="xalign">0</property>
                               </object>
                               <packing>
@@ -1883,6 +1886,9 @@
                 <property name="position">3</property>
               </packing>
             </child>
+            <style>
+              <class name="main-panel"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1948,6 +1954,7 @@
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">Applying Changes…</property>
+                                <property name="ellipsize">end</property>
                                 <property name="xalign">0</property>
                                 <attributes>
                                   <attribute name="weight" value="light"/>

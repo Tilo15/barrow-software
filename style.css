@@ -10,5 +10,5 @@
 	background: linear-gradient(180deg, #ffffff 0%, #eeeeee 75%, #eeeeee 100%);
 }
 .category-tile:active {
-	background: #eeeeee;
+	background: linear-gradient(180deg, #ffffff 0%, #eeeeee 1%, #eeeeee 100%);
 }
