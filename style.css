@@ -1,0 +1,14 @@
+
+.category-tile {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #eeeeee 100%);
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid #c0c0c0
+}
+
+.category-tile:hover {
+	background: linear-gradient(180deg, #ffffff 0%, #eeeeee 75%, #eeeeee 100%);
+}
+.category-tile:active {
+	background: #eeeeee;
+}

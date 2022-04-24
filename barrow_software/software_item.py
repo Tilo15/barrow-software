@@ -20,7 +20,7 @@ class SoftwareFeatures:
         return self.is_nonfree or (not self.is_libre) or (not self.is_trusted) or self.has_trackers or self.uses_nonfree_services or self.has_explicit_content
 
     def set_free_from_licence_string(self, string):
-        free_keywords = ["GPL", "MPL", "BSD", "MIT", "LGPL", "ASL", "AGPL", "Unlicense", "CC-BY", "zlib", "PublicDomain", "Public Domain", "public domain"]
+        free_keywords = ["GPL", "MPL", "BSD", "MIT", "LGPL", "ASL", "AGPL", "OFL", "Unlicense", "CC-BY", "zlib", "PublicDomain", "Public Domain", "public domain"]
         self.is_libre = False
         self.is_nonfree = False
         if(string == "" or string == None):
