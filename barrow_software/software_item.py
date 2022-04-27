@@ -1,6 +1,4 @@
-import gi
-gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gio, Gtk
+from gi.repository import GLib, Adw, Gtk
 
 import sys
 
@@ -37,7 +35,7 @@ class SoftwareFeatures:
             self.is_libre = False
             self.is_nonfree = True
 
-@Gtk.Template.from_file("software_item.ui")
+@Gtk.Template.from_file("ui/software-item.ui")
 class SoftwareItem(Gtk.Box):
     __gtype_name__ = "SoftwareItem"
 

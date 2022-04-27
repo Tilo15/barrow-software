@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="MainWindow" parent="AdwApplicationWindow">
+    <property name="title">Software Centre</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="transition-type">crossfade</property>
+        <child>
+          <object class="GtkBox" id="app_loader">
+            <property name="orientation">vertical</property>
+            <property name="valign">fill</property>
+            <child>
+              <object class="AdwHeaderBar"></object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="vexpand">true</property>
+                <property name="spacing">8</property>
+                <child>
+                  <object class="GtkSpinner">
+                    <property name="width-request">32</property>
+                    <property name="spinning">true</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <style>
+                          <class name="title-3"/>
+                        </style>
+                        <property name="halign">start</property>
+                        <property name="label">Reading software lists…</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="loading_label">
+                        <property name="halign">start</property>
+                        <property name="label">Please wait…</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwLeaflet" id="leaflet">
+            <child>
+              <object class="GtkBox" id="search_page">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwHeaderBar">
+                    <property name="show-end-title-buttons" bind-source="leaflet" bind-property="folded" bind-flags="sync-create"/>
+                    <child type="title">
+                      <object class="AdwWindowTitle">
+                        <property name="title">Categories</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="valign">fill</property>
+                    <property name="vexpand">true</property>
+                    <property name="propagate-natural-width">true</property>
+                    <child>
+                      <object class="GtkBox">
+                        <style>
+                          <class name="side-pane"/>
+                        </style>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">18</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <style>
+                                  <class name="title-3"/>
+                                </style>
+                                <property name="halign">start</property>
+                                <property name="label">Search for software</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="search_entry"></object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <style>
+                              <class name="title-3"/>
+                            </style>
+                            <property name="halign">start</property>
+                            <property name="label">App Categories</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBox" id="category_list">
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                            <signal name="row-selected" handler="category_selected"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="results_page">
+                <property name="hexpand">true</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons" bind-source="leaflet" bind-property="folded" bind-flags="sync-create"/>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible" bind-source="leaflet" bind-property="folded" bind-flags="sync-create"/>
+                        <signal name="clicked" handler="go_back"/>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">go-previous-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="valign">fill</property>
+                    <property name="vexpand">true</property>
+                    <property name="propagate-natural-width">true</property>
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="maximum-size">1200</property>
+                        <property name="tightening-threshold">1800</property>
+                        <child>
+                          <object class="GtkBox">
+                            <style>
+                              <class name="results-pane"/>
+                            </style>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkBox">
+                                <style>
+                                  <class name="results-header"/>
+                                </style>
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">8</property>
+                                <child>
+                                  <object class="GtkImage" id="result_icon">
+                                    <property name="halign">start</property>
+                                    <property name="pixel-size">64</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="halign">start</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkLabel" id="result_title">
+                                        <style>
+                                          <class name="title-3"/>
+                                        </style>
+                                        <property name="halign">start</property>
+                                        <property name="label">Category</property>
+                                        <property name="wrap">true</property>
+                                        <property name="wrap-mode">word-char</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="result_subtitle">
+                                        <property name="halign">start</property>
+                                        <property name="label">Subtitle</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkFlowBox" id="results">
+                                <property name="homogeneous">true</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

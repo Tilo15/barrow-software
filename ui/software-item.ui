@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="SoftwareItem" parent="GtkBox">
+    <style>
+      <class name="app-item"/>
+      <class name="card"/>
+    </style>
+    <property name="orientation">horizontal</property>
+    <property name="spacing">8</property>
+    <property name="width-request">200</property>
+    <child>
+      <object class="GtkImage" id="app_icon">
+        <property name="halign">start</property>
+        <property name="pixel-size">64</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="halign">start</property>
+        <property name="valign">center</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="app_name">
+            <style>
+              <class name="heading"/>
+            </style>
+            <property name="halign">start</property>
+            <property name="label">Name</property>
+            <property name="ellipsize">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="app_short_desc">
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <property name="halign">start</property>
+            <property name="label">Subtitle</property>
+            <property name="ellipsize">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkRevealer" id="antifeature_badge">
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="pixel-size">16</property>
+                    <property name="icon-name">dialog-warning-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Has features you may not like</property>
+                    <property name="ellipsize">end</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

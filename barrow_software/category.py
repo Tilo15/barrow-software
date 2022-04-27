@@ -1,26 +1,24 @@
 from unicodedata import category
-import gi
-gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gio, Gtk
 
 import sys
 
-@Gtk.Template.from_file("category.ui")
-class Category(Gtk.Button):
-    __gtype_name__ = "Category"
+@Gtk.Template.from_file("ui/category-item.ui")
+class Category(Gtk.Box):
+    __gtype_name__ = "CategoryItem"
 
-    category_name: Gtk.Label = Gtk.Template.Child()
-    category_description: Gtk.Label = Gtk.Template.Child()
-    category_icon: Gtk.Image = Gtk.Template.Child()
+    title: Gtk.Label = Gtk.Template.Child()
+    subtitle: Gtk.Label = Gtk.Template.Child()
+    icon: Gtk.Image = Gtk.Template.Child()
 
     def __init__(self, name, icon, components, **kwargs):
-        super(Gtk.Button, self).__init__(**kwargs)
+        super(Gtk.Box, self).__init__(**kwargs)
         self.name = name
         self.description = "{} items".format(len(components))
         self.components = components
-        self.category_name.set_label(name)
-        self.category_description.set_label(self.description)
+        self.title.set_label(name)
+        self.subtitle.set_label(self.description)
         self.icon_name = icon
         if(icon != None):
             print(icon)
-            self.category_icon.set_from_icon_name(icon, 32)
+            self.icon.set_from_icon_name(icon)

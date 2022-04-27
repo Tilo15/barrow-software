@@ -1,0 +1,158 @@
+
+using Gtk 4.0;
+using Adw 1;
+
+template MainWindow : Adw.ApplicationWindow {
+    title: "Software Centre";
+
+    Gtk.Stack stack {
+        transition-type: crossfade;
+
+        Gtk.Box app_loader {
+            orientation: vertical;
+            valign: fill;
+            Adw.HeaderBar {}
+            Gtk.Box {
+                orientation: horizontal;
+                valign: center;
+                halign: center;
+                vexpand: true;
+                spacing: 8;
+
+                Gtk.Spinner {
+                    width-request: 32;
+                    spinning: true;
+                }
+
+                Gtk.Box {
+                    orientation: vertical;
+                    Gtk.Label {
+                        styles ["title-3"]
+                        halign: start;
+                        label: "Reading software lists…";
+                    }
+                    Gtk.Label loading_label {
+                        halign: start;
+                        label: "Please wait…";
+                    }
+                }
+            }
+        }
+
+        Adw.Leaflet leaflet {
+            Gtk.Box search_page {
+                orientation: vertical;
+                Adw.HeaderBar {
+                    show-end-title-buttons: bind leaflet.folded;
+                    [title]
+                    Adw.WindowTitle {
+                        title: "Categories";
+                    }
+                }
+
+                Gtk.ScrolledWindow {
+                    hscrollbar-policy: never;
+                    valign: fill;
+                    vexpand: true;
+                    propagate-natural-width: true;
+                    Gtk.Box {
+                        styles ["side-pane"]
+                        orientation: vertical;
+                        spacing: 18;
+
+                        Gtk.Box {
+                            orientation: vertical;
+                            spacing: 8;
+                            Gtk.Label {
+                                styles ["title-3"]
+                                halign: start;
+                                label: "Search for software";
+                            }
+                            Gtk.Entry search_entry {}
+                        }
+
+                        Gtk.Label {
+                            styles ["title-3"]
+                            halign: start;
+                            label: "App Categories";
+                        }
+
+                        Gtk.ListBox category_list {
+                            styles ["boxed-list"]
+                            row-selected => category_selected();
+                        }
+                    }
+                }
+
+            }
+
+            Gtk.Box results_page {
+                hexpand: true;
+                orientation: vertical;
+
+                Adw.HeaderBar {
+                    show-start-title-buttons: bind leaflet.folded;
+                    Gtk.Button {
+                        visible: bind leaflet.folded;
+                        clicked => go_back();
+                        Gtk.Image {
+                            icon-name: "go-previous-symbolic";
+                        }
+                    }
+                }
+
+                Gtk.ScrolledWindow {
+                    hscrollbar-policy: never;
+                    valign: fill;
+                    vexpand: true;
+                    propagate-natural-width: true;
+
+                    Adw.Clamp {
+                        maximum-size: 1200;
+                        tightening-threshold: 1800;
+
+                        Gtk.Box {
+                            styles ["results-pane"]
+                            orientation: vertical;
+                            
+                            Gtk.Box {
+                                styles ["results-header"]
+                                orientation: horizontal;
+                                spacing: 8;
+
+                                Gtk.Image result_icon {
+                                    halign: start;
+                                    pixel-size: 64;
+                                }
+
+                                Gtk.Box {
+                                    halign: start;
+                                    orientation: vertical;
+                                    Gtk.Label result_title {
+                                        styles ["title-3"]
+                                        halign: start;
+                                        label: "Category";
+                                        wrap: true;
+                                        wrap-mode: word_char;
+                                    }
+                                    Gtk.Label result_subtitle {
+                                        halign: start;
+                                        label: "Subtitle";
+                                    }
+                                }
+                            }
+                        
+                            Gtk.FlowBox results {
+                                homogeneous: true;
+                            }
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+}

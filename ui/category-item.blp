@@ -1,0 +1,41 @@
+
+using Gtk 4.0;
+using Adw 1;
+
+template CategoryItem : Gtk.Box {
+    Gtk.Box {
+        styles ["category"]
+        orientation: horizontal;
+        spacing: 8;
+
+        Gtk.Image icon {
+            halign: start;
+            pixel-size: 32;
+            icon-name: "go-next-symbolic";
+            pixel-size: 32;
+        }
+
+        Gtk.Box {
+            halign: start;
+            orientation: vertical;
+            Gtk.Label title {
+                styles ["heading"]
+                halign: start;
+                label: "Category";
+            }
+            Gtk.Label subtitle {
+                styles ["dim-label"]
+                halign: start;
+                label: "Subtitle";
+            }
+        }
+
+        Gtk.Image {
+            styles ["dim-label"]
+            halign: end;
+            hexpand: true;
+            icon-name: "go-next-symbolic";
+            pixel-size: 16;
+        }
+    }
+}

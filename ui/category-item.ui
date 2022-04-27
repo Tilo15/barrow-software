@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="CategoryItem" parent="GtkBox">
+    <child>
+      <object class="GtkBox">
+        <style>
+          <class name="category"/>
+        </style>
+        <property name="orientation">horizontal</property>
+        <property name="spacing">8</property>
+        <child>
+          <object class="GtkImage" id="icon">
+            <property name="halign">start</property>
+            <property name="pixel-size">32</property>
+            <property name="icon-name">go-next-symbolic</property>
+            <property name="pixel-size">32</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="halign">start</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="title">
+                <style>
+                  <class name="heading"/>
+                </style>
+                <property name="halign">start</property>
+                <property name="label">Category</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="subtitle">
+                <style>
+                  <class name="dim-label"/>
+                </style>
+                <property name="halign">start</property>
+                <property name="label">Subtitle</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <property name="halign">end</property>
+            <property name="hexpand">true</property>
+            <property name="icon-name">go-next-symbolic</property>
+            <property name="pixel-size">16</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

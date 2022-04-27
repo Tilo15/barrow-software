@@ -1,0 +1,48 @@
+
+using Gtk 4.0;
+using Adw 1;
+
+template SoftwareItem : Gtk.Box {
+    styles ["app-item", "card"]
+    orientation: horizontal;
+    spacing: 8;
+    width-request: 200;
+
+    Gtk.Image app_icon {
+        halign: start;
+        pixel-size: 64;
+    }
+
+    Gtk.Box {
+        halign: start;
+        valign: center;
+        orientation: vertical;
+        Gtk.Label app_name {
+            styles ["heading"]
+            halign: start;
+            label: "Name";
+            ellipsize: end;
+        }
+
+        Gtk.Label app_short_desc {
+            styles ["dim-label"]
+            halign: start;
+            label: "Subtitle";
+            ellipsize: end;
+        }
+
+        Gtk.Revealer antifeature_badge {
+            Gtk.Box {
+                orientation: horizontal;
+                Gtk.Image {
+                    pixel-size: 16;
+                    icon-name: "dialog-warning-symbolic";
+                }
+                Gtk.Label {
+                    label: "Has features you may not like";
+                    ellipsize: end;
+                }
+            }
+        }
+    }
+}

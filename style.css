@@ -1,14 +1,29 @@
 
-.category-tile {
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #eeeeee 100%);
-    border-radius: 8px;
-    padding: 8px;
-    border: 1px solid #c0c0c0
+.side-pane {
+    margin: 18px;
 }
 
-.category-tile:hover {
-	background: linear-gradient(180deg, #ffffff 0%, #eeeeee 75%, #eeeeee 100%);
+.category {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
-.category-tile:active {
-	background: linear-gradient(180deg, #ffffff 0%, #eeeeee 1%, #eeeeee 100%);
+.category image {
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.app-item image {
+    margin: 8px;
+}
+
+.results-pane {
+    margin: 18px;
+}
+
+.results-header {
+    margin-bottom: 18px;
+}
+
+.results-header image {
+    margin-right: 8px;
 }
